@@ -27,4 +27,26 @@ class KycController extends Controller
         $notify[] = ['success','KYC data updated successfully'];
         return back()->withNotify($notify);
     }
+
+
+
+
+    public function policyForm()
+    {
+        $pageTitle = 'Policy Form Setting';
+        $form = Form::where('act','policy')->first();
+        return view('admin.policy_type.index',compact('pageTitle','form'));
+    }
+
+    public function policyFormUpdate(Request $request)
+    {
+        $formProcessor = new FormProcessor();
+        $generatorValidation = $formProcessor->generatorValidation();
+        $request->validate($generatorValidation['rules'],$generatorValidation['messages']);
+        $exist = Form::where('act','policy')->first();
+        $formProcessor->generate('policy',$exist,'act');
+
+        $notify[] = ['success','Policy data updated successfully'];
+        return back()->withNotify($notify);
+    }
 }

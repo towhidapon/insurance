@@ -292,6 +292,8 @@ Route::middleware('admin')->group(function ()
     {
         Route::get('kyc-setting', 'setting')->name('kyc.setting');
         Route::post('kyc-setting', 'settingUpdate');
+        Route::get('policy-form-setting', 'policyForm')->name('policy.setting');
+        Route::post('policy-form-setting', 'policyFormUpdate');
     });
 
     //Notification Setting
