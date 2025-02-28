@@ -1,0 +1,365 @@
+{
+    "banner": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Banner Section",
+        "content": {
+            "images": {
+                "image": {
+                    "size": "500x500",
+                    "thumb": "100x100"
+                }
+            },
+            "mini_title": "text",
+            "heading": "text",
+            "subheading": "text",
+            "image_text_number": "text",
+            "image_text": "text"
+        },
+        "element": {
+            "images": {
+                "image": {
+                    "size": "280x280"
+                },
+                "customer_image": {
+                    "size": "100x100"
+                }
+            },
+            "title": "text",
+            "modal": true
+        }
+    },
+    "quote": {
+        "builder": true,
+        "name": "Quote Section",
+        "content": {
+            "heading": "text",
+            "subheading": "text"
+        }
+    },
+    "why_choose": {
+        "builder": true,
+        "name": "Why Choose Us Section",
+        "content": {
+            "heading": "text",
+            "subheading": "text",
+            "button_heading": "text",
+            "button_text": "text",
+            "button_url": "text"
+        },
+        "element": {
+            "images": {
+                "image": {
+                    "size": "100x100"
+                }
+            },
+            "title": "text",
+            "description": "textarea"
+        }
+    },
+    "contact_us": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Contact Us",
+        "content": {
+            "title": "text",
+            "heading": "text",
+            "short_heading": "text",
+            "short_details": "text",
+            "contact_details": "text",
+            "button_text": "text",
+            "contact_number": "text",
+            "latitude": "text",
+            "longitude": "text"
+        }
+    },
+    "verify_insurance": {
+        "builder": true,
+        "no_selection": false,
+        "name": "Verify Your Insurance",
+        "content": {
+            "heading": "text",
+            "sub_heading": "text"
+        },
+        "element": {
+            "title": "text",
+            "short_description": "text",
+            "modal": true
+        }
+    },
+    "how_it_works": {
+        "builder": true,
+        "no_selection": true,
+        "name": "How It Works",
+        "content": {
+            "heading": "text",
+            "sub_heading": "text"
+        },
+        "element": {
+            "images": {
+                "image": {
+                    "size": "100x100"
+                }
+            },
+            "title": "text",
+            "description": "textarea",
+            "modal": true
+        }
+    },
+    "trusted_by_thousands": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Trusted By Thousands",
+        "content": {
+            "heading": "text"
+        },
+        "element": {
+            "title": "text",
+            "short_decription": "text",
+            "modal": true
+        }
+    },
+    "popular_insurance_policies": {
+        "builder": true,
+        "no_selection": false,
+        "name": "Popular Insurance Policies",
+        "content": {
+            "heading": "text",
+            "sub_heading": "text"
+        },
+        "element": {
+            "title": "text",
+            "description": "textarea",
+            "button_text": "text",
+            "button_url": "text",
+            "modal": true
+        }
+    },
+    "testimonial": {
+        "builder": true,
+        "no_selection": false,
+        "name": "Testimonial",
+        "content": {
+            "heading": "text",
+            "sub_heading": "text"
+        },
+        "element": {
+            "select": {
+                "name": "rating",
+                "options": {
+                    "1": "*",
+                    "2": "**",
+                    "3": "***",
+                    "4": "****",
+                    "5": "*****"
+                }
+            },
+            "title": "text",
+            "description": "textarea",
+            "customer_image": "image",
+            "customer_name": "text",
+            "customer_designation": "text",
+            "modal": true
+        }
+    },
+    "feature": {
+        "builder": true,
+        "name": "Feature Section",
+        "content": {
+            "heading": "text",
+            "subheading": "text"
+        },
+        "element": {
+            "title": "text",
+            "description": "textarea",
+            "feature_icon": "icon",
+            "select": {
+                "name": "trx_type",
+                "options": {
+                    "deposit": "Deposit",
+                    "withdraw": "Withdraw"
+                }
+            },
+            "modal": false
+        }
+    },
+    "about": {
+        "builder": true,
+        "name": "About Us",
+        "content": {
+            "images": {
+                "background_image": {
+                    "size": "500x500",
+                    "thumb": "100x100"
+                },
+                "about_image": {
+                    "size": "500x500",
+                    "thumb": "100x100"
+                }
+            },
+            "heading": "text",
+            "subheading": "text",
+            "description": "textarea",
+            "about_icon": "icon"
+        }
+    },
+    "service": {
+        "builder": true,
+        "name": "Service Section",
+        "content": {
+            "select": {
+                "name": "trx_type",
+                "options": {
+                    "deposit": "Deposit",
+                    "withdraw": "Withdraw"
+                }
+            },
+            "heading": "text",
+            "subheading": "text"
+        },
+        "element": {
+            "select": {
+                "name": "trx_type",
+                "options": {
+                    "deposit": "Deposit",
+                    "withdraw": "Withdraw"
+                }
+            },
+            "service_icon": "icon",
+            "title": "text",
+            "description": "textarea",
+            "modal": false
+        }
+    },
+    "counter": {
+        "builder": true,
+        "name": "Counter Section",
+        "content": {
+            "heading": "text",
+            "subheading": "text"
+        },
+        "element": {
+            "title": "text",
+            "counter_digit": "text",
+            "sub_title": "text",
+            "counter_icon": "icon",
+            "counter_icon_2": "icon",
+            "modal": false
+        }
+    },
+    "policy_pages": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Policy Pages",
+        "hide_builder": true,
+        "element": {
+            "title": "text",
+            "slug": "title",
+            "details": "textarea-nic",
+            "modal": false,
+            "seo": true
+        }
+    },
+    "register_disable": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Registration Disable",
+        "content": {
+            "images": {
+                "image": {
+                    "size": "280x280"
+                }
+            },
+            "heading": "text",
+            "subheading": "text",
+            "button_name": "text",
+            "button_url": "text"
+        }
+    },
+    "faq": {
+        "builder": true,
+        "name": "FAQ Section",
+        "content": {
+            "heading": "text",
+            "subheading": "text",
+            "end_heading": "text",
+            "end_subheading": "text"
+        },
+        "element": {
+            "question": "text",
+            "answer": "textarea",
+            "icon": "icon",
+            "modal": true
+        }
+    },
+    "blog": {
+        "builder": true,
+        "name": "Blog Section",
+        "content": {
+            "heading": "text",
+            "subheading": "text",
+            "button_name": "text",
+            "button_url": "text"
+        },
+        "element": {
+            "images": {
+                "image": {
+                    "size": "728x465",
+                    "thumb": "120x80"
+                }
+            },
+            "title": "text",
+            "slug": "title",
+            "description": "textarea-nic",
+            "modal": false,
+            "seo": true
+        }
+    },
+    "fast_reliable": {
+        "builder": true,
+        "name": "Fast, Reliable And Easy Insurance Section",
+        "content": {
+            "heading": "text",
+            "subheading": "text",
+            "button_name": "text",
+            "button_url": "text"
+        }
+    },
+    "subscribe": {
+        "builder": true,
+        "name": "Subscribe Section",
+        "content": {
+            "title": "text",
+            "short_details": "text"
+        }
+    },
+    "footer": {
+        "builder": true,
+        "name": "Footer Section",
+        "content": {
+            "title": "text",
+            "short_details": "text"
+        }
+    },
+    "social_icon": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Social Icons",
+        "element": {
+            "title": "text",
+            "social_icon": "icon",
+            "url": "text",
+            "modal": true
+        }
+    },
+    "kyc": {
+        "builder": true,
+        "no_selection": true,
+        "name": "KYC Content",
+        "content": {
+            "required": "text",
+            "pending": "text",
+            "reject": "text"
+        }
+    }
+}
