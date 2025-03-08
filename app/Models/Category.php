@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use App\Traits\GlobalStatus;
@@ -15,5 +14,10 @@ class Category extends Model
     public function plan()
     {
         return $this->hasMany(Plan::class);
+    }
+
+    public function features()
+    {
+        return $this->hasMany(Feature::class);
     }
 }

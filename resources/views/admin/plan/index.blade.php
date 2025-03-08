@@ -55,23 +55,16 @@
                                         </td>
 
                                         <td class="button--group">
-                                            <button type="button" class="btn btn-outline--primary btn-sm edit-plan-btn"
-                                                data-plan='@json($plan)'>
+                                            <button type="button" class="btn btn-outline--primary btn-sm edit-plan-btn" data-plan='@json($plan)'>
                                                 <i class="las la-pen"></i>@lang('Edit')
                                             </button>
 
                                             @if ($plan->status == Status::DISABLE)
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline--success confirmationBtn"
-                                                    data-action="{{ route('admin.plan.status', $plan->id) }}"
-                                                    data-question="@lang('Are you sure to enable this plan?')">
+                                                <button type="button" class="btn btn-sm btn-outline--success confirmationBtn" data-action="{{ route('admin.plan.status', $plan->id) }}" data-question="@lang('Are you sure to enable this plan?')">
                                                     <i class="la la-eye"></i> @lang('Enable')
                                                 </button>
                                             @else
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline--danger confirmationBtn"
-                                                    data-action="{{ route('admin.plan.status', $plan->id) }}"
-                                                    data-question="@lang('Are you sure to disable this category?')">
+                                                <button type="button" class="btn btn-sm btn-outline--danger confirmationBtn" data-action="{{ route('admin.plan.status', $plan->id) }}" data-question="@lang('Are you sure to disable this category?')">
                                                     <i class="la la-eye-slash"></i> @lang('Disable')
                                                 </button>
                                             @endif
@@ -86,17 +79,24 @@
                         </table>
                     </div>
                 </div>
+                @if ($plans->hasPages())
+                    <div class="card-footer py-4">
+                        @php echo paginateLinks($plans) @endphp
+                    </div>
+                @endif
             </div>
         </div>
     </div>
     <x-confirmation-modal />
 
-    <div class="modal fade plan-modal" tabindex="-1" id="plan-modal">
-        <div class="modal-dialog modal-md">
+    <div class="modal fade plan-modal" tabindex="-1" id="plan-modal" data-bs-keyboard="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">@lang('Add Plan')</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="las la-times"></i>
+                    </button>
                 </div>
                 <form class="plan-form" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -131,8 +131,7 @@
                             <div class="form-group col-md-6">
                                 <label>@lang('Coverage Amount')</label>
                                 <div class="input-group">
-                                    <input type="number" class="form-control" name="coverage_amount" step="0.01"
-                                        required />
+                                    <input type="number" class="form-control" name="coverage_amount" step="0.01" required />
                                     <span class="input-group-text">@lang('USD')</span>
                                 </div>
                             </div>
@@ -143,48 +142,42 @@
                                     <span class="input-group-text">@lang('Months')</span>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-lg-12">
                                 <ul class="list-group">
-                                    <li class="list-group-item d-flex flex-wrap flex-sm-nowrap gap-2 align-items-center">
-                                        <div class="col-md-6">
+                                    <li class="list-group-item d-flex flex-wrap flex-sm-nowrap gap-2 justify-content-between align-items-center">
+                                        <div class="col-lg-10">
                                             <label>@lang('Spouse Coverage')</label>
                                         </div>
-                                        <div class="form-group col-md-6">
-                                            <input type="checkbox" data-width="100%" data-size="large"
-                                                data-onstyle="-success" data-offstyle="-danger" data-bs-toggle="toggle"
-                                                data-height="35" data-on="@lang('Enable')" data-off="@lang('Disable')"
-                                                class="spouse_coverage" name="spouse_coverage" value="1">
+                                        <div class="col-lg-2">
+                                            <input type="checkbox" data-width="100%" data-size="large" data-onstyle="-success" data-offstyle="-danger" data-bs-toggle="toggle" data-height="35" data-on="@lang('Enable')"
+                                                data-off="@lang('Disable')" class="spouseCoverage" name="spouse_coverage" value="1">
                                         </div>
                                     </li>
 
-                                    <li class="list-group-item d-flex flex-wrap flex-sm-nowrap gap-2 align-items-center">
-                                        <div class="col-md-6">
+                                    <li class="list-group-item d-flex flex-wrap flex-sm-nowrap gap-2 justify-content-between align-items-center">
+                                        <div class="col-lg-10">
                                             <label>@lang('Children Coverage')</label>
                                         </div>
-                                        <div class="form-group col-md-6">
-                                            <input type="checkbox" data-width="100%" data-size="large"
-                                                data-onstyle="-success" data-offstyle="-danger" data-bs-toggle="toggle"
-                                                data-height="35" data-on="@lang('Enable')"
-                                                data-off="@lang('Disable')" class="plan-children-coverage"
-                                                name="children_coverage" value="1">
+                                        <div class="col-lg-2">
+                                            <input type="checkbox" data-width="100%" data-size="large" data-onstyle="-success" data-offstyle="-danger" data-bs-toggle="toggle" data-height="35"
+                                                data-on="@lang('Enable')" data-off="@lang('Disable')" class="childrenCoverage" name="children_coverage" value="1">
                                         </div>
                                     </li>
 
-                                    <li
-                                        class="list-group-item d-flex flex-wrap flex-sm-nowrap gap-2 justify-content-between align-items-center children-number-field">
-                                        <div class="col-md-6">
+                                    <li class="list-group-item d-flex flex-wrap flex-sm-nowrap gap-2 justify-content-between align-items-center children-number-field">
+                                        <div class="col-lg-10">
                                             <label>@lang('No. of Children')</label>
                                         </div>
-                                        <div class="form-group col-md-6">
-                                            <input type="number" class="form-control plan-no-children"
-                                                name="no_children" min="0" id="noChildren" disabled>
+                                        <div class="col-lg-2">
+                                            <input type="number" class="form-control noChildren" name="no_children" min="0" id="noChildren" disabled>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
-
-                            <button type="submit" class="btn btn--primary w-100">@lang('Submit')</button>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn--primary w-100 h-45">@lang('Submit')</button>
                     </div>
                 </form>
             </div>
@@ -193,68 +186,90 @@
 @endsection
 
 @push('breadcrumb-plugins')
-    <button type="button" class="btn btn-outline--primary add-plan-btn">
-        <i class="las la-plus"></i> @lang('Add Plan')
+    <button type="button" class="btn btn-outline--primary add-plan-btn btn-sm">
+        <i class="las la-plus"></i> @lang('Add')
     </button>
 @endpush
+
+@push('style')
+    <style>
+        .toggle.btn-lg {
+            height: 37px !important;
+            min-height: 37px !important;
+        }
+
+        .toggle-handle {
+            width: 25px !important;
+            padding: 0;
+        }
+
+        .list-group-item:hover {
+            background-color: #F7F7F7;
+        }
+
+        .toggle-group label.btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 !important;
+        }
+    </style>
+@endpush
+
 
 @push('style-lib')
     <link href="{{ asset('assets/admin/css/fontawesome-iconpicker.min.css') }}" rel="stylesheet">
 @endpush
 
+
 @push('script-lib')
     <script src="{{ asset('assets/admin/js/fontawesome-iconpicker.js') }}"></script>
 @endpush
+
+
 
 @push('script')
     <script>
         (function($) {
             "use strict";
-
-            const $planModal = $('.plan-modal');
-            const $planForm = $('.plan-form');
+            const planModal = $("#plan-modal");
+            const planForm = $('.plan-form');
 
             $('.add-plan-btn').on('click', function() {
-                $planForm.attr('action', '{{ route('admin.plan.save') }}');
-                $planForm.trigger('reset');
-                $planModal.find('.children_coverage').prop('checked', false);
-                $planModal.find('.no_children').prop('disabled', true);
-                $planModal.modal('show');
+                planModal.find('.modal-title').text('@lang('Add Plan')');
+                planForm.attr('action', '{{ route('admin.plan.save') }}');
+                planForm.trigger('reset');
+                planModal.find('.spouseCoverage').bootstrapToggle('off');
+                planModal.find('.childrenCoverage').bootstrapToggle('off');
+                planModal.find('.noChildren').prop('disabled', true).val(0);
+                planModal.find('.plan-category').val('');
+                planModal.modal('show');
             });
 
             $('.edit-plan-btn').on('click', function() {
                 const plan = $(this).data('plan');
-                $planModal.find('.modal-title').text('Edit Plan');
-                $planForm.attr('action', "{{ route('admin.plan.save', '') }}/" + plan.id);
-                $planModal.find('input[name=name]').val(plan.name);
-                $planModal.find('.plan-category').val(plan.category_id);
-                $planModal.find('input[name=price]').val(parseFloat(plan.price).toFixed(2));
-                $planModal.find('input[name=payment_duration]').val(plan.payment_duration);
-                $planModal.find('input[name=coverage_amount]').val(parseFloat(plan.coverage_amount).toFixed(2));
-                $planModal.find('input[name=validity]').val(plan.validity);
-                $planModal.find('input[name=spouse_coverage]').prop('checked', plan.spouse_coverage == 1);
-                $planModal.find('input[name=children_coverage]').prop('checked', plan.children_coverage == 1);
-                $planModal.find('input[name=no_children]').val(plan.no_children).prop('disabled', plan
-                    .children_coverage != 1);
-                $planModal.modal('show');
+                planModal.find('.modal-title').text('Edit Plan');
+                planForm.attr('action', "{{ route('admin.plan.save', '') }}/" + plan.id);
+                planModal.find('input[name=name]').val(plan.name);
+                planModal.find('.plan-category').val(plan.category_id);
+                planModal.find('input[name=price]').val(parseFloat(plan.price).toFixed(2));
+                planModal.find('input[name=payment_duration]').val(plan.payment_duration);
+                planModal.find('input[name=coverage_amount]').val(parseFloat(plan.coverage_amount).toFixed(2));
+                planModal.find('input[name=validity]').val(plan.validity);
+                planModal.find('.spouseCoverage').bootstrapToggle(plan.spouse_coverage == 1 ? 'on' : 'off');
+                planModal.find('.childrenCoverage').bootstrapToggle(plan.children_coverage == 1 ? 'on' : 'off');
+                planModal.find('.noChildren').val(plan.no_children).prop('disabled', plan.children_coverage != 1);
+                planModal.modal('show');
             });
 
-            $('.plan-children-coverage').on('change', function() {
-                const $noChildren = $('.plan-no-children');
+            $('.childrenCoverage').on('change', function() {
+                const noChildren = $('.noChildren');
                 if ($(this).is(':checked')) {
-                    $noChildren.prop('disabled', false);
+                    noChildren.prop('disabled', false);
                 } else {
-                    $noChildren.prop('disabled', true).val(0);
+                    noChildren.prop('disabled', true).val(0);
                 }
-            })
+            });
         })(jQuery);
     </script>
-@endpush
-
-@push('style')
-    <style>
-        .category-image {
-            max-width: 100px;
-        }
-    </style>
 @endpush

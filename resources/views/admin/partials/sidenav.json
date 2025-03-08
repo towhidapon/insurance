@@ -26,6 +26,32 @@
         "route_name": "admin.dashboard",
         "menu_active": "admin.dashboard"
     },
+    "categories": {
+        "keyword": [
+            "subscriber",
+            "subscribers",
+            "Subscription management",
+            "Subscriber list",
+            "Subscriber activity"
+        ],
+        "title": "Manage Categories",
+        "icon": "las la-strikethrough",
+        "route_name": "admin.category.index",
+        "menu_active": "admin.category*"
+    },
+    "policy_plans": {
+        "keyword": [
+            "subscriber",
+            "subscribers",
+            "Subscription management",
+            "Subscriber list",
+            "Subscriber activity"
+        ],
+        "title": "Manage Policy Plans",
+        "icon": "lab la-pagelines",
+        "route_name": "admin.plan.index",
+        "menu_active": "admin.plan*"
+    },
     "manage_users": {
         "title": "Manage Users",
         "icon": "las la-users",
@@ -320,32 +346,7 @@
             }
         ]
     },
-    "categories": {
-        "keyword": [
-            "subscriber",
-            "subscribers",
-            "Subscription management",
-            "Subscriber list",
-            "Subscriber activity"
-        ],
-        "title": "Manage Categories",
-        "icon": "las la-strikethrough",
-        "route_name": "admin.category.index",
-        "menu_active": "admin.category*"
-    },
-    "policy_plans": {
-        "keyword": [
-            "subscriber",
-            "subscribers",
-            "Subscription management",
-            "Subscriber list",
-            "Subscriber activity"
-        ],
-        "title": "Manage Policy Plans",
-        "icon": "lab la-pagelines",
-        "route_name": "admin.plan.index",
-        "menu_active": "admin.plan*"
-    },
+
     "claim_insurance": {
         "title": "Claim Insurance",
         "icon": "lab la-get-pocket",

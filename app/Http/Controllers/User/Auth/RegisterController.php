@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\User\Auth;
 
 use App\Constants\Status;
@@ -29,9 +28,11 @@ class RegisterController extends Controller
     {
         $pageTitle = "Register";
         Intended::identifyRoute();
-        return view('Template::user.auth.register', compact('pageTitle'));
+        $info       = json_decode(json_encode(getIpInfo()), true);
+        $mobileCode = @implode(',', $info['code']);
+        $countries  = json_decode(file_get_contents(resource_path('views/partials/country.json')));
+        return view('Template::user.auth.register', compact('pageTitle', 'mobileCode', 'countries'));
     }
-
 
     protected function validator(array $data)
     {
@@ -47,16 +48,16 @@ class RegisterController extends Controller
             $agree = 'required';
         }
 
-        $validate     = Validator::make($data, [
+        $validate = Validator::make($data, [
             'firstname' => 'required',
             'lastname'  => 'required',
             'email'     => 'required|string|email|unique:users',
             'password'  => ['required', 'confirmed', $passwordValidation],
             'captcha'   => 'sometimes|required',
-            'agree'     => $agree
-        ],[
-            'firstname.required'=>'The first name field is required',
-            'lastname.required'=>'The last name field is required'
+            'agree'     => $agree,
+        ], [
+            'firstname.required' => 'The first name field is required',
+            'lastname.required'  => 'The last name field is required',
         ]);
 
         return $validate;
@@ -64,7 +65,7 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        if (!gs('registration')) {
+        if (! gs('registration')) {
             $notify[] = ['error', 'Registration not allowed'];
             return back()->withNotify($notify);
         }
@@ -72,22 +73,18 @@ class RegisterController extends Controller
 
         $request->session()->regenerateToken();
 
-        if (!verifyCaptcha()) {
+        if (! verifyCaptcha()) {
             $notify[] = ['error', 'Invalid captcha provided'];
             return back()->withNotify($notify);
         }
-
-
 
         event(new Registered($user = $this->create($request->all())));
 
         $this->guard()->login($user);
 
         return $this->registered($request, $user)
-            ?: redirect($this->redirectPath());
+        ?: redirect($this->redirectPath());
     }
-
-
 
     protected function create(array $data)
     {
@@ -105,11 +102,11 @@ class RegisterController extends Controller
         $user->lastname  = $data['lastname'];
         $user->password  = Hash::make($data['password']);
         $user->ref_by    = $referUser ? $referUser->id : 0;
-        $user->kv = gs('kv') ? Status::NO : Status::YES;
-        $user->ev = gs('ev') ? Status::NO : Status::YES;
-        $user->sv = gs('sv') ? Status::NO : Status::YES;
-        $user->ts = Status::DISABLE;
-        $user->tv = Status::ENABLE;
+        $user->kv        = gs('kv') ? Status::NO : Status::YES;
+        $user->ev        = gs('ev') ? Status::NO : Status::YES;
+        $user->sv        = gs('sv') ? Status::NO : Status::YES;
+        $user->ts        = Status::DISABLE;
+        $user->tv        = Status::ENABLE;
         $user->save();
 
         $adminNotification            = new AdminNotification();
@@ -117,7 +114,6 @@ class RegisterController extends Controller
         $adminNotification->title     = 'New member registered';
         $adminNotification->click_url = urlPath('admin.users.detail', $user->id);
         $adminNotification->save();
-
 
         //Login Log Create
         $ip        = getRealIP();
@@ -147,26 +143,26 @@ class RegisterController extends Controller
         $userLogin->os      = @$userAgent['os_platform'];
         $userLogin->save();
 
-
         return $user;
     }
 
-    public function checkUser(Request $request){
+    public function checkUser(Request $request)
+    {
         $exist['data'] = false;
         $exist['type'] = null;
         if ($request->email) {
-            $exist['data'] = User::where('email',$request->email)->exists();
-            $exist['type'] = 'email';
+            $exist['data']  = User::where('email', $request->email)->exists();
+            $exist['type']  = 'email';
             $exist['field'] = 'Email';
         }
         if ($request->mobile) {
-            $exist['data'] = User::where('mobile',$request->mobile)->where('dial_code',$request->mobile_code)->exists();
-            $exist['type'] = 'mobile';
+            $exist['data']  = User::where('mobile', $request->mobile)->where('dial_code', $request->mobile_code)->exists();
+            $exist['type']  = 'mobile';
             $exist['field'] = 'Mobile';
         }
         if ($request->username) {
-            $exist['data'] = User::where('username',$request->username)->exists();
-            $exist['type'] = 'username';
+            $exist['data']  = User::where('username', $request->username)->exists();
+            $exist['type']  = 'username';
             $exist['field'] = 'Username';
         }
         return response($exist);

@@ -5,28 +5,19 @@
         "name": "Banner Section",
         "content": {
             "images": {
-                "image": {
-                    "size": "500x500",
-                    "thumb": "100x100"
-                }
-            },
-            "mini_title": "text",
-            "heading": "text",
-            "subheading": "text",
-            "image_text_number": "text",
-            "image_text": "text"
-        },
-        "element": {
-            "images": {
-                "image": {
-                    "size": "280x280"
+                "banner_shape": {
+                    "size": "452x904"
                 },
-                "customer_image": {
-                    "size": "100x100"
+                "banner_image": {
+                    "size": "468x546"
+                },
+                "mini_image": {
+                    "size": "135x28"
                 }
             },
             "title": "text",
-            "modal": true
+            "subtitle": "text",
+            "short_details": "text"
         }
     },
     "quote": {
@@ -34,7 +25,12 @@
         "name": "Quote Section",
         "content": {
             "heading": "text",
-            "subheading": "text"
+            "subheading": "text",
+            "images": {
+                "quote_shape": {
+                    "size": "1903x450"
+                }
+            }
         }
     },
     "why_choose": {
@@ -43,34 +39,33 @@
         "content": {
             "heading": "text",
             "subheading": "text",
-            "button_heading": "text",
-            "button_text": "text",
-            "button_url": "text"
+            "button_heading": "text"
         },
         "element": {
             "images": {
                 "image": {
-                    "size": "100x100"
+                    "size": "419x177"
                 }
             },
             "title": "text",
-            "description": "textarea"
+            "details": "textarea",
+            "modal": true
         }
     },
-    "contact_us": {
+    "coverage": {
         "builder": true,
-        "no_selection": true,
-        "name": "Contact Us",
+        "name": "Coverage Section",
         "content": {
             "title": "text",
-            "heading": "text",
-            "short_heading": "text",
-            "short_details": "text",
-            "contact_details": "text",
-            "button_text": "text",
-            "contact_number": "text",
-            "latitude": "text",
-            "longitude": "text"
+            "subtitle": "text"
+        },
+        "element": {
+            "images": {
+                "image": {
+                    "size": "160X45"
+                }
+            },
+            "modal": true
         }
     },
     "verify_insurance": {
@@ -89,16 +84,16 @@
     },
     "how_it_works": {
         "builder": true,
-        "no_selection": true,
+        "no_selection": false,
         "name": "How It Works",
         "content": {
             "heading": "text",
-            "sub_heading": "text"
+            "subheading": "text"
         },
         "element": {
             "images": {
                 "image": {
-                    "size": "100x100"
+                    "size": "64x64"
                 }
             },
             "title": "text",
@@ -106,33 +101,33 @@
             "modal": true
         }
     },
-    "trusted_by_thousands": {
+    "counter": {
         "builder": true,
-        "no_selection": true,
-        "name": "Trusted By Thousands",
+        "no_selection": false,
+        "name": "Counter Section",
         "content": {
-            "heading": "text"
+            "heading": "text",
+            "images": {
+                "bg_image": {
+                    "size": "1905x480"
+                }
+            }
         },
         "element": {
+            "number": "text",
+            "sign": "text",
             "title": "text",
             "short_decription": "text",
             "modal": true
         }
     },
-    "popular_insurance_policies": {
+    "popular": {
         "builder": true,
         "no_selection": false,
-        "name": "Popular Insurance Policies",
+        "name": "Popular Section",
         "content": {
             "heading": "text",
-            "sub_heading": "text"
-        },
-        "element": {
-            "title": "text",
-            "description": "textarea",
-            "button_text": "text",
-            "button_url": "text",
-            "modal": true
+            "subheading": "text"
         }
     },
     "testimonial": {
@@ -141,7 +136,7 @@
         "name": "Testimonial",
         "content": {
             "heading": "text",
-            "sub_heading": "text"
+            "subheading": "text"
         },
         "element": {
             "select": {
@@ -154,9 +149,13 @@
                     "5": "*****"
                 }
             },
+            "images": {
+                "customer_image": {
+                    "size": "32x32"
+                }
+            },
             "title": "text",
             "description": "textarea",
-            "customer_image": "image",
             "customer_name": "text",
             "customer_designation": "text",
             "modal": true
@@ -203,6 +202,38 @@
             "about_icon": "icon"
         }
     },
+    "contact_us": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Contact Us",
+        "content": {
+            "short_title": "text",
+            "heading": "text",
+            "subheading": "text",
+            "address": "text",
+            "contact_number": "text",
+            "email": "text",
+            "latitude": "text",
+            "longitude": "text"
+        }
+    },
+    "health_insurance": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Health Insurance",
+        "content": {
+            "heading": "text",
+            "subheading": "text",
+            "images": {
+                "background_shape": {
+                    "size": "455x905"
+                },
+                "image": {
+                    "size": "515x580"
+                }
+            }
+        }
+    },
     "service": {
         "builder": true,
         "name": "Service Section",
@@ -231,22 +262,7 @@
             "modal": false
         }
     },
-    "counter": {
-        "builder": true,
-        "name": "Counter Section",
-        "content": {
-            "heading": "text",
-            "subheading": "text"
-        },
-        "element": {
-            "title": "text",
-            "counter_digit": "text",
-            "sub_title": "text",
-            "counter_icon": "icon",
-            "counter_icon_2": "icon",
-            "modal": false
-        }
-    },
+
     "policy_pages": {
         "builder": true,
         "no_selection": true,
@@ -282,13 +298,12 @@
         "content": {
             "heading": "text",
             "subheading": "text",
-            "end_heading": "text",
-            "end_subheading": "text"
+            "button_heading": "text",
+            "button_subheading": "text"
         },
         "element": {
             "question": "text",
             "answer": "textarea",
-            "icon": "icon",
             "modal": true
         }
     },
@@ -298,31 +313,38 @@
         "content": {
             "heading": "text",
             "subheading": "text",
-            "button_name": "text",
-            "button_url": "text"
+            "blog_page_title": "text",
+            "blog_page_subtitle": "text"
         },
         "element": {
             "images": {
                 "image": {
-                    "size": "728x465",
-                    "thumb": "120x80"
+                    "size": "855x450",
+                    "thumb": "310x270"
                 }
             },
             "title": "text",
             "slug": "title",
+            "short_description": "text",
             "description": "textarea-nic",
             "modal": false,
             "seo": true
         }
     },
-    "fast_reliable": {
+    "cta": {
         "builder": true,
-        "name": "Fast, Reliable And Easy Insurance Section",
+        "name": "CTA Section",
         "content": {
+            "images": {
+                "background_image": {
+                    "size": "1905x355"
+                },
+                "cta_image": {
+                    "size": "475x285"
+                }
+            },
             "heading": "text",
-            "subheading": "text",
-            "button_name": "text",
-            "button_url": "text"
+            "subheading": "text"
         }
     },
     "subscribe": {
@@ -337,6 +359,8 @@
         "builder": true,
         "name": "Footer Section",
         "content": {
+            "newsletter_title": "text",
+            "newsletter_subtitle": "text",
             "title": "text",
             "short_details": "text"
         }
@@ -346,7 +370,6 @@
         "no_selection": true,
         "name": "Social Icons",
         "element": {
-            "title": "text",
             "social_icon": "icon",
             "url": "text",
             "modal": true
@@ -360,6 +383,22 @@
             "required": "text",
             "pending": "text",
             "reject": "text"
+        }
+    },
+    "login_register": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Login & Register Section",
+        "content": {
+            "images": {
+                "background_image": {
+                    "size": "1905x840"
+                }
+            },
+            "login_page_title": "text",
+            "login_page_subtitle": "text",
+            "register_page_title": "text",
+            "register_page_subtitle": "text"
         }
     }
 }

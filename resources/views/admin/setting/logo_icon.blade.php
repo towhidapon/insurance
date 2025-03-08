@@ -14,9 +14,13 @@
                     <form method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row justify-content-center">
-                            <div class="form-group col-md-8 col-sm-6">
-                                <label> @lang('Logo')</label>
+                            <div class="form-group col-md-4 col-sm-6">
+                                <label> @lang('Logo Light')</label>
                                 <x-image-uploader name="logo" :imagePath="siteLogo() . '?' . time()" :size="false" class="w-100" id="uploadLogo" :required="false" />
+                            </div>
+                            <div class="form-group col-md-4 col-sm-6">
+                                <label> @lang('Logo Dark')</label>
+                                <x-image-uploader name="logo_dark" :imagePath="siteLogo('dark') . '?' . time()" :size="false" class="w-100" :required="false" />
                             </div>
                             <div class="form-group col-md-4 col-sm-6">
                                 <label> @lang('Favicon')</label>

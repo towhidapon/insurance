@@ -2,39 +2,31 @@
 
 use Illuminate\Support\Facades\Route;
 
-
-Route::namespace('Auth')->group(function ()
-{
-    Route::middleware('admin.guest')->group(function ()
-    {
-        Route::controller('LoginController')->group(function ()
-        {
+Route::namespace('Auth')->group(function () {
+    Route::middleware('admin.guest')->group(function () {
+        Route::controller('LoginController')->group(function () {
             Route::get('/', 'showLoginForm')->name('login');
             Route::post('/', 'login')->name('login');
             Route::get('logout', 'logout')->middleware('admin')->withoutMiddleware('admin.guest')->name('logout');
         });
 
         // Admin Password Reset
-        Route::controller('ForgotPasswordController')->prefix('password')->name('password.')->group(function ()
-        {
+        Route::controller('ForgotPasswordController')->prefix('password')->name('password.')->group(function () {
             Route::get('reset', 'showLinkRequestForm')->name('reset');
             Route::post('reset', 'sendResetCodeEmail');
             Route::get('code-verify', 'codeVerify')->name('code.verify');
             Route::post('verify-code', 'verifyCode')->name('verify.code');
         });
 
-        Route::controller('ResetPasswordController')->group(function ()
-        {
+        Route::controller('ResetPasswordController')->group(function () {
             Route::get('password/reset/{token}', 'showResetForm')->name('password.reset.form');
             Route::post('password/reset/change', 'reset')->name('password.change');
         });
     });
 });
 
-Route::middleware('admin')->group(function ()
-{
-    Route::controller('AdminController')->group(function ()
-    {
+Route::middleware('admin')->group(function () {
+    Route::controller('AdminController')->group(function () {
         Route::get('dashboard', 'dashboard')->name('dashboard');
         Route::get('chart/deposit-withdraw', 'depositAndWithdrawReport')->name('chart.deposit.withdraw');
         Route::get('chart/transaction', 'transactionReport')->name('chart.transaction');
@@ -58,8 +50,7 @@ Route::middleware('admin')->group(function ()
     });
 
     // Users Manager
-    Route::controller('ManageUsersController')->name('users.')->prefix('users')->group(function ()
-    {
+    Route::controller('ManageUsersController')->name('users.')->prefix('users')->group(function () {
         Route::get('/', 'allUsers')->name('all');
         Route::get('active', 'activeUsers')->name('active');
         Route::get('banned', 'bannedUsers')->name('banned');
@@ -90,24 +81,21 @@ Route::middleware('admin')->group(function ()
     });
 
     //Category
-    Route::controller('CategoryController')->prefix('category')->name('category.')->group(function ()
-    {
+    Route::controller('CategoryController')->prefix('category')->name('category.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('save/{id?}', 'save')->name('save');
         Route::post('status/{id}', 'toggleStatus')->name('status');
     });
 
     // Plans
-    Route::controller('PlanController')->prefix('plan')->name('plan.')->group(function ()
-    {
+    Route::controller('PlanController')->prefix('plan')->name('plan.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('save/{id?}', 'save')->name('save');
         Route::post('status/{id}', 'toggleStatus')->name('status');
     });
 
     // Subscriber
-    Route::controller('SubscriberController')->prefix('subscriber')->name('subscriber.')->group(function ()
-    {
+    Route::controller('SubscriberController')->prefix('subscriber')->name('subscriber.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('send-email', 'sendEmailForm')->name('send.email');
         Route::post('remove/{id}', 'remove')->name('remove');
@@ -115,11 +103,9 @@ Route::middleware('admin')->group(function ()
     });
 
     // Deposit Gateway
-    Route::name('gateway.')->prefix('gateway')->group(function ()
-    {
+    Route::name('gateway.')->prefix('gateway')->group(function () {
         // Automatic Gateway
-        Route::controller('AutomaticGatewayController')->prefix('automatic')->name('automatic.')->group(function ()
-        {
+        Route::controller('AutomaticGatewayController')->prefix('automatic')->name('automatic.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('edit/{alias}', 'edit')->name('edit');
             Route::post('update/{code}', 'update')->name('update');
@@ -127,10 +113,8 @@ Route::middleware('admin')->group(function ()
             Route::post('status/{id}', 'status')->name('status');
         });
 
-
         // Manual Methods
-        Route::controller('ManualGatewayController')->prefix('manual')->name('manual.')->group(function ()
-        {
+        Route::controller('ManualGatewayController')->prefix('manual')->name('manual.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('new', 'create')->name('create');
             Route::post('new', 'store')->name('store');
@@ -140,10 +124,8 @@ Route::middleware('admin')->group(function ()
         });
     });
 
-
     // DEPOSIT SYSTEM
-    Route::controller('DepositController')->prefix('deposit')->name('deposit.')->group(function ()
-    {
+    Route::controller('DepositController')->prefix('deposit')->name('deposit.')->group(function () {
         Route::get('all/{user_id?}', 'deposit')->name('list');
         Route::get('pending/{user_id?}', 'pending')->name('pending');
         Route::get('rejected/{user_id?}', 'rejected')->name('rejected');
@@ -155,13 +137,10 @@ Route::middleware('admin')->group(function ()
         Route::post('approve/{id}', 'approve')->name('approve');
     });
 
-
     // WITHDRAW SYSTEM
-    Route::name('withdraw.')->prefix('withdraw')->group(function ()
-    {
+    Route::name('withdraw.')->prefix('withdraw')->group(function () {
 
-        Route::controller('WithdrawalController')->name('data.')->group(function ()
-        {
+        Route::controller('WithdrawalController')->name('data.')->group(function () {
             Route::get('pending/{user_id?}', 'pending')->name('pending');
             Route::get('approved/{user_id?}', 'approved')->name('approved');
             Route::get('rejected/{user_id?}', 'rejected')->name('rejected');
@@ -171,10 +150,8 @@ Route::middleware('admin')->group(function ()
             Route::post('reject', 'reject')->name('reject');
         });
 
-
         // Withdraw Method
-        Route::controller('WithdrawMethodController')->prefix('method')->name('method.')->group(function ()
-        {
+        Route::controller('WithdrawMethodController')->prefix('method')->name('method.')->group(function () {
             Route::get('/', 'methods')->name('index');
             Route::get('create', 'create')->name('create');
             Route::post('create', 'store')->name('store');
@@ -185,8 +162,7 @@ Route::middleware('admin')->group(function ()
     });
 
     // Report
-    Route::controller('ReportController')->prefix('report')->name('report.')->group(function ()
-    {
+    Route::controller('ReportController')->prefix('report')->name('report.')->group(function () {
         Route::get('transaction/{user_id?}', 'transaction')->name('transaction');
         Route::get('login/history', 'loginHistory')->name('login.history');
         Route::get('login/ipHistory/{ip}', 'loginIpHistory')->name('login.ipHistory');
@@ -194,10 +170,8 @@ Route::middleware('admin')->group(function ()
         Route::get('email/detail/{id}', 'emailDetails')->name('email.details');
     });
 
-
     // Admin Support
-    Route::controller('SupportTicketController')->prefix('ticket')->name('ticket.')->group(function ()
-    {
+    Route::controller('SupportTicketController')->prefix('ticket')->name('ticket.')->group(function () {
         Route::get('/', 'tickets')->name('index');
         Route::get('pending', 'pendingTicket')->name('pending');
         Route::get('closed', 'closedTicket')->name('closed');
@@ -209,10 +183,8 @@ Route::middleware('admin')->group(function ()
         Route::post('delete/{id}', 'ticketDelete')->name('delete');
     });
 
-
     // Language Manager
-    Route::controller('LanguageController')->prefix('language')->name('language.')->group(function ()
-    {
+    Route::controller('LanguageController')->prefix('language')->name('language.')->group(function () {
         Route::get('/', 'langManage')->name('manage');
         Route::post('/', 'langStore')->name('manage.store');
         Route::post('delete/{id}', 'langDelete')->name('manage.delete');
@@ -225,8 +197,7 @@ Route::middleware('admin')->group(function ()
         Route::get('get-keys', 'getKeys')->name('get.key');
     });
 
-    Route::controller('GeneralSettingController')->group(function ()
-    {
+    Route::controller('GeneralSettingController')->group(function () {
 
         Route::get('system-setting', 'systemSetting')->name('setting.system');
 
@@ -270,9 +241,7 @@ Route::middleware('admin')->group(function ()
         Route::get('in-app-purchase/file/download', 'inAppPurchaseFileDownload')->name('setting.app.purchase.file.download');
     });
 
-
-    Route::controller('CronConfigurationController')->name('cron.')->prefix('cron')->group(function ()
-    {
+    Route::controller('CronConfigurationController')->name('cron.')->prefix('cron')->group(function () {
         Route::get('index', 'cronJobs')->name('index');
         Route::post('store', 'cronJobStore')->name('store');
         Route::post('update', 'cronJobUpdate')->name('update');
@@ -286,19 +255,20 @@ Route::middleware('admin')->group(function ()
         Route::post('schedule/log/flush/{id}', 'logFlush')->name('log.flush');
     });
 
-
     //KYC setting
-    Route::controller('KycController')->group(function ()
-    {
+    Route::controller('KycController')->group(function () {
         Route::get('kyc-setting', 'setting')->name('kyc.setting');
         Route::post('kyc-setting', 'settingUpdate');
-        Route::get('policy-form-setting', 'policyForm')->name('policy.setting');
-        Route::post('policy-form-setting', 'policyFormUpdate');
+    });
+
+    // Policy Form Setting
+    Route::controller('PolicyFormController')->group(function () {
+        Route::get('form/{act}', 'customForm')->name('custom.form');
+        Route::post('form/{act}', 'updateCustomForm');
     });
 
     //Notification Setting
-    Route::name('setting.notification.')->controller('NotificationController')->prefix('notification')->group(function ()
-    {
+    Route::name('setting.notification.')->controller('NotificationController')->prefix('notification')->group(function () {
         //Template Setting
         Route::get('global/email', 'globalEmail')->name('global.email');
         Route::post('global/email/update', 'globalEmailUpdate')->name('global.email.update');
@@ -330,17 +300,14 @@ Route::middleware('admin')->group(function ()
     });
 
     // Plugin
-    Route::controller('ExtensionController')->prefix('extensions')->name('extensions.')->group(function ()
-    {
+    Route::controller('ExtensionController')->prefix('extensions')->name('extensions.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('update/{id}', 'update')->name('update');
         Route::post('status/{id}', 'status')->name('status');
     });
 
-
     //System Information
-    Route::controller('SystemController')->name('system.')->prefix('system')->group(function ()
-    {
+    Route::controller('SystemController')->name('system.')->prefix('system')->group(function () {
         Route::get('info', 'systemInfo')->name('info');
         Route::get('server-info', 'systemServerInfo')->name('server.info');
         Route::get('optimize', 'optimize')->name('optimize');
@@ -350,17 +317,13 @@ Route::middleware('admin')->group(function ()
         Route::get('system-update/log', 'systemUpdateLog')->name('update.log');
     });
 
-
     // SEO
     Route::get('seo', 'FrontendController@seoEdit')->name('seo');
 
-
     // Frontend
-    Route::name('frontend.')->prefix('frontend')->group(function ()
-    {
+    Route::name('frontend.')->prefix('frontend')->group(function () {
 
-        Route::controller('FrontendController')->group(function ()
-        {
+        Route::controller('FrontendController')->group(function () {
             Route::get('index', 'index')->name('index');
             Route::get('templates', 'templates')->name('templates');
             Route::post('templates', 'templatesActive')->name('templates.active');
@@ -374,8 +337,7 @@ Route::middleware('admin')->group(function ()
         });
 
         // Page Builder
-        Route::controller('PageBuilderController')->group(function ()
-        {
+        Route::controller('PageBuilderController')->group(function () {
             Route::get('manage-pages', 'managePages')->name('manage.pages');
             Route::get('manage-pages/check-slug/{id?}', 'checkSlug')->name('manage.pages.check.slug');
             Route::post('manage-pages', 'managePagesSave')->name('manage.pages.save');

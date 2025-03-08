@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ config('app.locale') }}" itemscope itemtype="http://schema.org/WebPage">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -11,16 +12,21 @@
 
     <link href="{{ asset('assets/global/css/all.min.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{asset('assets/global/css/line-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/global/css/line-awesome.min.css') }}">
 
-    <link rel="stylesheet" href="{{asset($activeTemplateTrue.'css/custom.css')}}">
+    <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/main.css.map') }}">
+    <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/selet2.min.css') }}">
+
     @stack('style-lib')
 
     @stack('style')
-    <style>
-        :root{
+    {{-- <style>
+        :root {
             --main: 115, 103, 240;
         }
+
         body {
             display: flex;
             align-items: center;
@@ -29,9 +35,12 @@
             background-color: #f6f6f6;
             min-height: 100vh;
         }
-        body > div,body > section {
+
+        body>div,
+        body>section {
             width: 100%;
         }
+
         body {
             display: flex;
             align-items: center;
@@ -40,162 +49,205 @@
             background-color: #f6f6f6;
             min-height: 100vh;
         }
-        body > div,body > section {
+
+        body>div,
+        body>section {
             width: 100%;
         }
+
         .custom--card {
-            box-shadow: 0 3px 35px rgba(0,0,0, .1);
+            box-shadow: 0 3px 35px rgba(0, 0, 0, .1);
             border: 0;
         }
-        .custom--card .card-header,.custom--card .card-footer  {
+
+        .custom--card .card-header,
+        .custom--card .card-footer {
             padding: 13px 25px;
             text-align: center;
             background-color: rgb(var(--main));
             border: 0;
         }
+
         .custom--card .card-header .title {
             margin-bottom: 0;
             color: #fff
         }
+
         .custom--card .card-body {
             padding: 25px;
             border: 0;
         }
+
         .form-group {
             margin-bottom: 15px;
         }
+
         .form-label {
             font-size: 15px;
             font-weight: 500;
             color: #555;
         }
-        .form--control.input,.form--control.select{
+
+        .form--control.input,
+        .form--control.select {
             height: 45px;
         }
+
         .form--control {
             border-width: 2px;
             border-color: #dce1e6;
         }
+
         .form--control:focus {
             border-color: rgb(var(--main));
             box-shadow: 0 0 25px rgba(var(--main) 0.071);
             outline: 0;
         }
+
         .forgot-pass {
             font-size: 14px;
         }
+
         .btn--base {
             color: #fff;
             background-color: rgb(var(--main));
         }
+
         .btn--base:hover {
             color: #fff;
         }
+
         .btn {
             padding: 10px 30px;
             font-weight: 500;
         }
-        .home-link{
+
+        .home-link {
             text-decoration: none
         }
 
-        label.required:after{
+        label.required:after {
             content: '*';
-            color: #DC3545!important;
+            color: #DC3545 !important;
             margin-left: 2px;
         }
-    </style>
-    <link rel="stylesheet" href="{{ asset($activeTemplateTrue.'css/color.php') }}?color={{ gs('base_color') }}&secondColor={{ gs('secondary_color') }}">
+    </style> --}}
+    {{-- <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/color.php') }}?color={{ gs('base_color') }}&secondColor={{ gs('secondary_color') }}"> --}}
 </head>
 @php echo loadExtension('google-analytics') @endphp
+
 <body>
 
-@stack('fbComment')
+    @stack('fbComment')
 
-@yield('content')
-
-@php
-    $cookie = App\Models\Frontend::where('data_keys','cookie.data')->first();
-@endphp
-@if(($cookie->data_values->status == Status::ENABLE) && !\Cookie::get('gdpr_cookie'))
-    <!-- cookies dark version start -->
-    <div class="cookies-card text-center hide">
-      <div class="cookies-card__icon bg--base">
-        <i class="las la-cookie-bite"></i>
-      </div>
-      <p class="mt-4 cookies-card__content">{{ $cookie->data_values->short_desc }} <a href="{{ route('cookie.policy') }}" target="_blank">@lang('learn more')</a></p>
-      <div class="cookies-card__btn mt-4">
-        <a href="javascript:void(0)" class="btn btn--base w-100 policy">@lang('Allow')</a>
-      </div>
+    {{-- <div class="preloader">
+        <div class="loader-p"></div>
     </div>
-  <!-- cookies dark version end -->
-  @endif
+    <!--==================== Preloader End ====================-->
+    <!--==================== Overlay Start ====================-->
+    <div class="body-overlay"></div>
+    <!--==================== Overlay End ====================-->
+
+    <!--==================== Sidebar Overlay End ====================-->
+    <div class="sidebar-overlay"></div>
+    <!--==================== Sidebar Overlay End ====================-->
+
+    <!-- ==================== Scroll to Top End Here ==================== -->
+    <a class="scroll-top"><i class="fas fa-angle-double-up"></i></a>
+    <!-- ==================== Scroll to Top End Here ==================== --> --}}
+
+    @include($activeTemplate . 'partials.header')
+
+    @yield('content')
+
+    @include($activeTemplate . 'partials.footer')
+    @php
+        $cookie = App\Models\Frontend::where('data_keys', 'cookie.data')->first();
+    @endphp
+    @if ($cookie->data_values->status == Status::ENABLE && !\Cookie::get('gdpr_cookie'))
+        <!-- cookies dark version start -->
+        <div class="cookies-card text-center hide">
+            <div class="cookies-card__icon bg--base">
+                <i class="las la-cookie-bite"></i>
+            </div>
+            <p class="mt-4 cookies-card__content">{{ $cookie->data_values->short_desc }} <a href="{{ route('cookie.policy') }}" target="_blank">@lang('learn more')</a></p>
+            <div class="cookies-card__btn mt-4">
+                <a href="javascript:void(0)" class="btn btn--base w-100 policy">@lang('Allow')</a>
+            </div>
+        </div>
+        <!-- cookies dark version end -->
+    @endif
 
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="{{asset('assets/global/js/jquery-3.7.1.min.js')}}"></script>
-<script src="{{asset('assets/global/js/bootstrap.bundle.min.js')}}"></script>
-
-@stack('script-lib')
-
-@php echo loadExtension('tawk-chat') @endphp
-
-@include('partials.notify')
-
-@if(gs('pn'))
-@include('partials.push_script')
-@endif
-@stack('script')
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{ asset('assets/global/js/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('assets/global/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset($activeTemplateTrue . 'js/main.js') }}"></script>
+    <script src="{{ asset($activeTemplateTrue . 'js/select2.min.js') }}"></script>
 
 
 
-<script>
-    (function ($) {
-        "use strict";
-        $(".langSel").on("change", function() {
-            window.location.href = "{{route('home')}}/change/"+$(this).val() ;
-        });
+    @stack('script-lib')
 
-        $('.policy').on('click',function(){
-            $.get('{{route('cookie.accept')}}', function(response){
-                $('.cookies-card').addClass('d-none');
+    @php echo loadExtension('tawk-chat') @endphp
+
+    @include('partials.notify')
+
+    @if (gs('pn'))
+        @include('partials.push_script')
+    @endif
+    @stack('script')
+
+
+
+    <script>
+        (function($) {
+            "use strict";
+            $(".langSel").on("change", function() {
+                window.location.href = "{{ route('home') }}/change/" + $(this).val();
             });
-        });
 
-        setTimeout(function(){
-            $('.cookies-card').removeClass('hide')
-        },2000);
+            $('.policy').on('click', function() {
+                $.get('{{ route('cookie.accept') }}', function(response) {
+                    $('.cookies-card').addClass('d-none');
+                });
+            });
 
-        var inputElements = $('[type=text],select,textarea');
-        $.each(inputElements, function (index, element) {
-            element = $(element);
-            element.closest('.form-group').find('label').attr('for',element.attr('name'));
-            element.attr('id',element.attr('name'))
-        });
+            setTimeout(function() {
+                $('.cookies-card').removeClass('hide')
+            }, 2000);
 
-        $.each($('input, select, textarea'), function (i, element) {
-            var elementType = $(element);
-            if(elementType.attr('type') != 'checkbox'){
-                if (element.hasAttribute('required')) {
-                    $(element).closest('.form-group').find('label').addClass('required');
+            var inputElements = $('[type=text],select,textarea');
+            $.each(inputElements, function(index, element) {
+                element = $(element);
+                element.closest('.form-group').find('label').attr('for', element.attr('name'));
+                element.attr('id', element.attr('name'))
+            });
+
+            $.each($('input, select, textarea'), function(i, element) {
+                var elementType = $(element);
+                if (elementType.attr('type') != 'checkbox') {
+                    if (element.hasAttribute('required')) {
+                        $(element).closest('.form-group').find('label').addClass('required');
+                    }
                 }
-            }
 
-        });
+            });
 
 
-        let disableSubmission = false;
-        $('.disableSubmission').on('submit',function(e){
-            if (disableSubmission) {
-            e.preventDefault()
-            }else{
-            disableSubmission = true;
-            }
-        });
+            let disableSubmission = false;
+            $('.disableSubmission').on('submit', function(e) {
+                if (disableSubmission) {
+                    e.preventDefault()
+                } else {
+                    disableSubmission = true;
+                }
+            });
 
-    })(jQuery);
-</script>
+        })(jQuery);
+    </script>
 
 </body>
+
 </html>
