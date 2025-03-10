@@ -49,6 +49,7 @@ class PlanController extends Controller
 
         if($request->has('feature_id')) {
             $features = Feature::whereIn('id', $request->feature_id)->get();    
+            
 
 
         }
