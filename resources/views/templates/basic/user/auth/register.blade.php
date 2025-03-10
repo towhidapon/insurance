@@ -6,7 +6,7 @@
 @section('content')
     @if (gs('registration'))
 
-        <section class="account register bg-img" data-background-image="{{ frontendImage('login_register', @$registerContent->data_values->background_image) }}">
+        <section class="account register bg-img" data-background-image="{{ frontendImage('login_register', @$registerContent->data_values->background_image, '1905x840') }}">
             <div class="container">
                 <div class="account-inner">
                     <div class="account-form-wrapper">
@@ -19,21 +19,12 @@
                         <form action="{{ route('user.register') }}" method="POST" class="verify-gcaptcha disableSubmission">
                             @csrf
                             <div class="account-form">
-                                @if (session()->get('reference') != null)
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="referenceBy" class="form-label">@lang('Reference by')</label>
-                                            <input type="text" name="referBy" id="referenceBy" class="form-control form--control" value="{{ session()->get('reference') }}" readonly>
-                                        </div>
-                                    </div>
-                                @endif
-
                                 <div class="row gy-4">
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-6">
                                         <label for="name" class="form-label form--label"> @lang('First Name') </label>
                                         <input type="text" class="form-control form--control form-two" placeholder="Enter Name" id="name" name="firstname" value="{{ old('firstname') }}" required>
                                     </div>
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-6">
                                         <label for="name" class="form-label form--label"> @lang('last Name') </label>
                                         <input type="text" class="form-control form--control form-two" placeholder="Enter Name" id="name" name="lastname" value="{{ old('lastname') }}" required>
                                     </div>

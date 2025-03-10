@@ -35,7 +35,7 @@
                         <div class="testimonial-item__info">
 
                             <div class="testimonial-item__thumb">
-                                <img src="{{ frontendImage('testimonial', $testimonialElement->data_values->customer_image) }}" class="fit-image" alt="image">
+                                <img src="{{ frontendImage('testimonial', $testimonialElement->data_values->customer_image, '30x30') }}" class="fit-image" alt="image">
                             </div>
                             <div class="testimonial-item__details">
                                 <p class="testimonial-item__name"> {{ __($testimonialElement->data_values->customer_name) }}</p>

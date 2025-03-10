@@ -55,16 +55,23 @@
                                         </td>
 
                                         <td class="button--group">
-                                            <button type="button" class="btn btn-outline--primary btn-sm edit-plan-btn" data-plan='@json($plan)'>
+                                            <button type="button" class="btn btn-outline--primary btn-sm edit-plan-btn"
+                                                data-plan='@json($plan)'>
                                                 <i class="las la-pen"></i>@lang('Edit')
                                             </button>
 
                                             @if ($plan->status == Status::DISABLE)
-                                                <button type="button" class="btn btn-sm btn-outline--success confirmationBtn" data-action="{{ route('admin.plan.status', $plan->id) }}" data-question="@lang('Are you sure to enable this plan?')">
+                                                <button type="button"
+                                                    class="btn btn-sm btn-outline--success confirmationBtn"
+                                                    data-action="{{ route('admin.plan.status', $plan->id) }}"
+                                                    data-question="@lang('Are you sure to enable this plan?')">
                                                     <i class="la la-eye"></i> @lang('Enable')
                                                 </button>
                                             @else
-                                                <button type="button" class="btn btn-sm btn-outline--danger confirmationBtn" data-action="{{ route('admin.plan.status', $plan->id) }}" data-question="@lang('Are you sure to disable this category?')">
+                                                <button type="button"
+                                                    class="btn btn-sm btn-outline--danger confirmationBtn"
+                                                    data-action="{{ route('admin.plan.status', $plan->id) }}"
+                                                    data-question="@lang('Are you sure to disable this category?')">
                                                     <i class="la la-eye-slash"></i> @lang('Disable')
                                                 </button>
                                             @endif
@@ -114,6 +121,17 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label>@lang('Feature')</label>
+                                <select multiple name="feature_id[]" class="form-control plan-category" required>
+                                    @foreach ($features as $feature)
+                                        <option value="{{ $feature->id }}">{{ $feature->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+
+
                             <div class="form-group col-md-6">
                                 <label>@lang('Price')</label>
                                 <div class="input-group">
@@ -131,7 +149,8 @@
                             <div class="form-group col-md-6">
                                 <label>@lang('Coverage Amount')</label>
                                 <div class="input-group">
-                                    <input type="number" class="form-control" name="coverage_amount" step="0.01" required />
+                                    <input type="number" class="form-control" name="coverage_amount" step="0.01"
+                                        required />
                                     <span class="input-group-text">@lang('USD')</span>
                                 </div>
                             </div>
@@ -144,32 +163,42 @@
                             </div>
                             <div class="col-lg-12">
                                 <ul class="list-group">
-                                    <li class="list-group-item d-flex flex-wrap flex-sm-nowrap gap-2 justify-content-between align-items-center">
+                                    <li
+                                        class="list-group-item d-flex flex-wrap flex-sm-nowrap gap-2 justify-content-between align-items-center">
                                         <div class="col-lg-10">
                                             <label>@lang('Spouse Coverage')</label>
                                         </div>
                                         <div class="col-lg-2">
-                                            <input type="checkbox" data-width="100%" data-size="large" data-onstyle="-success" data-offstyle="-danger" data-bs-toggle="toggle" data-height="35" data-on="@lang('Enable')"
-                                                data-off="@lang('Disable')" class="spouseCoverage" name="spouse_coverage" value="1">
+                                            <input type="checkbox" data-width="100%" data-size="large"
+                                                data-onstyle="-success" data-offstyle="-danger" data-bs-toggle="toggle"
+                                                data-height="35" data-on="@lang('Enable')"
+                                                data-off="@lang('Disable')" class="spouseCoverage"
+                                                name="spouse_coverage" value="1">
                                         </div>
                                     </li>
 
-                                    <li class="list-group-item d-flex flex-wrap flex-sm-nowrap gap-2 justify-content-between align-items-center">
+                                    <li
+                                        class="list-group-item d-flex flex-wrap flex-sm-nowrap gap-2 justify-content-between align-items-center">
                                         <div class="col-lg-10">
                                             <label>@lang('Children Coverage')</label>
                                         </div>
                                         <div class="col-lg-2">
-                                            <input type="checkbox" data-width="100%" data-size="large" data-onstyle="-success" data-offstyle="-danger" data-bs-toggle="toggle" data-height="35"
-                                                data-on="@lang('Enable')" data-off="@lang('Disable')" class="childrenCoverage" name="children_coverage" value="1">
+                                            <input type="checkbox" data-width="100%" data-size="large"
+                                                data-onstyle="-success" data-offstyle="-danger" data-bs-toggle="toggle"
+                                                data-height="35" data-on="@lang('Enable')"
+                                                data-off="@lang('Disable')" class="childrenCoverage"
+                                                name="children_coverage" value="1">
                                         </div>
                                     </li>
 
-                                    <li class="list-group-item d-flex flex-wrap flex-sm-nowrap gap-2 justify-content-between align-items-center children-number-field">
+                                    <li
+                                        class="list-group-item d-flex flex-wrap flex-sm-nowrap gap-2 justify-content-between align-items-center children-number-field">
                                         <div class="col-lg-10">
                                             <label>@lang('No. of Children')</label>
                                         </div>
                                         <div class="col-lg-2">
-                                            <input type="number" class="form-control noChildren" name="no_children" min="0" id="noChildren" disabled>
+                                            <input type="number" class="form-control noChildren" name="no_children"
+                                                min="0" id="noChildren" disabled>
                                         </div>
                                     </li>
                                 </ul>
@@ -187,7 +216,7 @@
 
 @push('breadcrumb-plugins')
     <button type="button" class="btn btn-outline--primary add-plan-btn btn-sm">
-        <i class="las la-plus"></i> @lang('Add')
+        <i class="las la-plus"></i>@lang('Add New')
     </button>
 @endpush
 
@@ -258,7 +287,8 @@
                 planModal.find('input[name=validity]').val(plan.validity);
                 planModal.find('.spouseCoverage').bootstrapToggle(plan.spouse_coverage == 1 ? 'on' : 'off');
                 planModal.find('.childrenCoverage').bootstrapToggle(plan.children_coverage == 1 ? 'on' : 'off');
-                planModal.find('.noChildren').val(plan.no_children).prop('disabled', plan.children_coverage != 1);
+                planModal.find('.noChildren').val(plan.no_children).prop('disabled', plan.children_coverage !=
+                    1);
                 planModal.modal('show');
             });
 

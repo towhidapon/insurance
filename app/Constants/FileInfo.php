@@ -84,6 +84,10 @@ class FileInfo
             'path' => 'assets/images/category_icon_image',
             'size' => '64x64',
         ];
+        $data['featureImage'] = [
+            'path' => 'assets/images/featureImage',
+            'size' => '48x48',
+        ];
         $data['pushConfig'] = [
             'path' => 'assets/admin',
         ];

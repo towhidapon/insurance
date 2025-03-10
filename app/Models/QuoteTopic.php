@@ -4,12 +4,12 @@ namespace App\Models;
 use App\Traits\GlobalStatus;
 use Illuminate\Database\Eloquent\Model;
 
-class Feature extends Model
+class QuoteTopic extends Model
 {
-
     use GlobalStatus;
-    public function plans()
+
+    public function quote()
     {
-        return $this->belongsToMany(Plan::class, 'feature_plan');
+        return $this->hasMany(Quote::class);
     }
 }

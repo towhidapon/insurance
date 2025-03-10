@@ -1,6 +1,5 @@
 @php
-    use App\Models\Category;
-    $categories = Category::where('status', 1)->get();
+    $categories = App\Models\Category::active()->get();
 @endphp
 
 <header class="header" id="header">

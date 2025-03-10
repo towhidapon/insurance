@@ -13,6 +13,8 @@
                                     <th>@lang('Category')</th>
                                     <th>@lang('Icon Image')</th>
                                     <th>@lang('Status')</th>
+                                    <th>@lang('Feature')</th>
+                                    <th>@lang('Popular')</th>
                                     <th>@lang('Action')</th>
                                 </tr>
                             </thead>
@@ -34,7 +36,15 @@
                                         <td>
                                             @php echo $category->statusBadge; @endphp
                                         </td>
+                                        <td>
+                                            <input type="checkbox" class="toggle-feature" data-id="{{ $category->id }}" data-width="100%" data-size="large" data-onstyle="-success" data-offstyle="-danger"
+                                                data-bs-toggle="toggle" data-height="35" data-on="@lang('Enable')" data-off="@lang('Disable')" {{ $category->is_featured ? 'checked' : '' }}>
+                                        </td>
 
+                                        <td>
+                                            <input type="checkbox" class="toggle-popular" data-id="{{ $category->id }}" data-width="100%" data-size="large" data-onstyle="-success" data-offstyle="-danger"
+                                                data-bs-toggle="toggle" data-height="35" data-on="@lang('Enable')" data-off="@lang('Disable')" {{ $category->is_popular ? 'checked' : '' }}>
+                                        </td>
                                         <td class="button--group">
                                             <button type="button" class="btn btn-outline--primary btn-sm editCategoryBtn" data-category='@json($category)'
                                                 data-image="{{ getImage(getFilePath('categoryImage') . '/' . $category->image, getFileSize('categoryImage')) }}"
@@ -128,7 +138,7 @@
 
 @push('breadcrumb-plugins')
     <button type="button" class="btn btn-outline--primary addCategoryBtn btn-sm">
-        <i class="las la-plus"></i> @lang('Add')
+        <i class="las la-plus"></i> @lang('Add New')
     </button>
 @endpush
 @push('style-lib')
@@ -139,6 +149,31 @@
     <script src="{{ asset('assets/admin/js/fontawesome-iconpicker.js') }}"></script>
 @endpush
 
+
+@push('style')
+    <style>
+        .toggle.btn-lg {
+            height: 37px !important;
+            min-height: 37px !important;
+        }
+
+        .toggle-handle {
+            width: 25px !important;
+            padding: 0;
+        }
+
+        .list-group-item:hover {
+            background-color: #F7F7F7;
+        }
+
+        .toggle-group label.btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 !important;
+        }
+    </style>
+@endpush
 
 
 @push('script')
@@ -219,6 +254,54 @@
                 updateButtonState();
                 modal.modal('show');
             });
+
+            $('.toggle-feature').on('change', function() {
+                let categoryId = $(this).data('id');
+                let status = $(this).prop('checked') ? 1 : 0;
+                let formData = new FormData();
+                formData.append('_token', "{{ csrf_token() }}");
+                formData.append('id', categoryId);
+                formData.append('is_featured', status);
+
+                $.ajax({
+                    url: "{{ route('admin.category.toggleFeature') }}",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        notify('success', response.message);
+                    },
+                    error: function() {
+                        notify('error', '@lang('Something went wrong!')');
+                    }
+                });
+            });
+
+            $('.toggle-popular').on('change', function() {
+                let categoryId = $(this).data('id');
+                let status = $(this).prop('checked') ? 1 : 0;
+                let formData = new FormData();
+
+                formData.append('_token', "{{ csrf_token() }}");
+                formData.append('id', categoryId);
+                formData.append('is_popular', status);
+
+                $.ajax({
+                    url: "{{ route('admin.category.togglePopular') }}",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        notify('success', response.message);
+                    },
+                    error: function() {
+                        notify('error', '@lang('Something went wrong!')');
+                    }
+                });
+            });
+
 
         })(jQuery);
     </script>

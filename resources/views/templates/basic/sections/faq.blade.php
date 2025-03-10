@@ -12,10 +12,10 @@
     <div class="container">
         <div class="section-heading">
             <h2 class="section-heading__title">
-                {{ @$faqContent->data_values->heading }}
+                {{ __(@$faqContent->data_values->heading) }}
             </h2>
             <p class="section-heading__desc">
-                {{ @$faqContent->data_values->subheading }}
+                {{ __(@$faqContent->data_values->subheading) }}
             </p>
         </div>
         <div class="accordion custom--accordion" id="accordionExample">
@@ -25,13 +25,13 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading{{ $index }}">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}" aria-expanded="false" aria-controls="collapse{{ $index }}">
-                                    {{ $faqElement->data_values->question }}
+                                    {{ __($faqElement->data_values->question) }}
                                 </button>
                             </h2>
                             <div id="collapse{{ $index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $index }}" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <p class="text">
-                                        {{ $faqElement->data_values->answer }}
+                                        {{ __($faqElement->data_values->answer) }}
                                     </p>
                                 </div>
                             </div>
@@ -45,13 +45,13 @@
                             <h2 class="accordion-header" id="heading{{ $index + $half }}">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $index + $half }}" aria-expanded="false"
                                     aria-controls="collapse{{ $index + $half }}">
-                                    {{ $faqElement->data_values->question }}
+                                    {{ __($faqElement->data_values->question) }}
                                 </button>
                             </h2>
                             <div id="collapse{{ $index + $half }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $index + $half }}" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <p class="text">
-                                        {{ $faqElement->data_values->answer }}
+                                        {{ __($faqElement->data_values->answer) }}
                                     </p>
                                 </div>
                             </div>
@@ -61,10 +61,10 @@
             </div>
         </div>
         <div class="faq-section__bottom">
-            <h4 class="title"> {{ @$faqContent->data_values->button_heading }} </h4>
-            <p class="desc"> {{ @$faqContent->data_values->button_subheading }} </p>
+            <h4 class="title"> {{ __(@$faqContent->data_values->button_heading) }} </h4>
+            <p class="desc"> {{ __(@$faqContent->data_values->button_subheading) }} </p>
             <div class="faq-section__btn">
-                <a href="{{ route('contact') }}" class="btn btn--base"> @lang('Contact With US') </a>
+                <a href="{{ @$faqContent->data_values->button_url }}" class="btn btn--base"> {{ __(@$faqContent->data_values->button_text) }} </a>
             </div>
         </div>
     </div>

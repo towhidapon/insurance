@@ -16,8 +16,4 @@ class Category extends Model
         return $this->hasMany(Plan::class);
     }
 
-    public function features()
-    {
-        return $this->hasMany(Feature::class);
-    }
 }

@@ -4,7 +4,7 @@
 @extends($activeTemplate . 'layouts.frontend')
 
 @section('content')
-    <section class="account bg-img" data-background-image="{{ frontendImage('login_register', @$loginContent->data_values->background_image) }}">
+    <section class="account bg-img" data-background-image="{{ frontendImage('login_register', @$loginContent->data_values->background_image, '1905x840') }}">
 
         <div class="container">
             <div class="account-inner">
@@ -18,8 +18,8 @@
                             @csrf
                             <div class="row gy-4">
                                 <div class="col-sm-12">
-                                    <label for="mail" class="form--label"> @lang('Email') </label>
-                                    <input type="email" name="username" value="{{ old('username') }}" class="form-control form--control" placeholder="olivia@untitledui.com" id="mail" required>
+                                    <label for="mail" class="form--label"> @lang('Username or Email') </label>
+                                    <input type="text" name="username" value="{{ old('username') }}" class="form-control form--control" placeholder="olivia@untitledui.com" id="mail" required>
                                 </div>
 
                                 <div class="col-sm-12">

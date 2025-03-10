@@ -5,19 +5,22 @@
         "name": "Banner Section",
         "content": {
             "images": {
-                "banner_shape": {
-                    "size": "452x904"
-                },
                 "banner_image": {
-                    "size": "468x546"
+                    "size": "470x545"
                 },
                 "mini_image": {
-                    "size": "135x28"
+                    "size": "135x30"
                 }
             },
             "title": "text",
             "subtitle": "text",
-            "short_details": "text"
+            "short_details": "text",
+            "mini_image_heading": "text",
+            "mini_image_subheading": "text",
+            "button_one_text": "text",
+            "button_one_url": "text",
+            "button_two_text": "text",
+            "button_two_url": "text"
         }
     },
     "quote": {
@@ -27,8 +30,8 @@
             "heading": "text",
             "subheading": "text",
             "images": {
-                "quote_shape": {
-                    "size": "1903x450"
+                "quote_bg": {
+                    "size": "1905x450"
                 }
             }
         }
@@ -39,12 +42,14 @@
         "content": {
             "heading": "text",
             "subheading": "text",
-            "button_heading": "text"
+            "button_heading": "text",
+            "button_text": "text",
+            "button_url": "text"
         },
         "element": {
             "images": {
                 "image": {
-                    "size": "419x177"
+                    "size": "420x180"
                 }
             },
             "title": "text",
@@ -139,6 +144,11 @@
             "subheading": "text"
         },
         "element": {
+            "images": {
+                "customer_image": {
+                    "size": "30x30"
+                }
+            },
             "select": {
                 "name": "rating",
                 "options": {
@@ -149,57 +159,11 @@
                     "5": "*****"
                 }
             },
-            "images": {
-                "customer_image": {
-                    "size": "32x32"
-                }
-            },
             "title": "text",
             "description": "textarea",
             "customer_name": "text",
             "customer_designation": "text",
-            "modal": true
-        }
-    },
-    "feature": {
-        "builder": true,
-        "name": "Feature Section",
-        "content": {
-            "heading": "text",
-            "subheading": "text"
-        },
-        "element": {
-            "title": "text",
-            "description": "textarea",
-            "feature_icon": "icon",
-            "select": {
-                "name": "trx_type",
-                "options": {
-                    "deposit": "Deposit",
-                    "withdraw": "Withdraw"
-                }
-            },
             "modal": false
-        }
-    },
-    "about": {
-        "builder": true,
-        "name": "About Us",
-        "content": {
-            "images": {
-                "background_image": {
-                    "size": "500x500",
-                    "thumb": "100x100"
-                },
-                "about_image": {
-                    "size": "500x500",
-                    "thumb": "100x100"
-                }
-            },
-            "heading": "text",
-            "subheading": "text",
-            "description": "textarea",
-            "about_icon": "icon"
         }
     },
     "contact_us": {
@@ -225,13 +189,34 @@
             "heading": "text",
             "subheading": "text",
             "images": {
-                "background_shape": {
-                    "size": "455x905"
-                },
                 "image": {
                     "size": "515x580"
                 }
             }
+        }
+    },
+    "insurance_list": {
+        "builder": true,
+        "name": "Insurance List Section",
+        "content": {
+            "images": {
+                "background_shape": {
+                    "size": "455x905"
+                },
+                "feature_image": {
+                    "size": "40x40"
+                },
+                "plan_image_one": {
+                    "size": "35x35"
+                },
+                "plan_image_two": {
+                    "size": "40x40"
+                }
+            }
+        },
+        "element": {
+            "plan_tips": "textarea-nic",
+            "modal": false
         }
     },
     "service": {
@@ -299,7 +284,9 @@
             "heading": "text",
             "subheading": "text",
             "button_heading": "text",
-            "button_subheading": "text"
+            "button_subheading": "text",
+            "button_text": "text",
+            "button_url": "text"
         },
         "element": {
             "question": "text",

@@ -9,9 +9,9 @@
     <div class="container">
         <div class="section-heading">
             <h2 class="section-heading__title" data-highlight="[2]">
-                {{ @$whyChooseContent->data_values->heading }}
+                {{ __(@$whyChooseContent->data_values->heading) }}
             </h2>
-            <p class="section-heading__desc"> {{ @$whyChooseContent->data_values->subheading }} </p>
+            <p class="section-heading__desc"> {{ __(@$whyChooseContent->data_values->subheading) }} </p>
         </div>
         <div class="choose-us-wrapper">
             <div class="choose-us-slider">
@@ -19,8 +19,8 @@
                     <div class="choose-us-card">
                         <div class="choose-us-card__thumb">
                             <div class="choose-us-card__thumb-inner">
-                                <img class="image1" src="{{ frontendImage('why_choose', @$item->data_values->image) }}" alt="image">
-                                <img class="image2" src="{{ frontendImage('why_choose', @$item->data_values->image) }}" alt="image">
+                                <img class="image1" src="{{ frontendImage('why_choose', @$item->data_values->image, '420x180') }}" alt="image">
+                                <img class="image2" src="{{ frontendImage('why_choose', @$item->data_values->image, '420x180') }}" alt="image">
                             </div>
                         </div>
                         <div class="choose-us-card__content">
@@ -35,8 +35,8 @@
                 @endforeach
             </div>
             <div class="choose-us-wrapper__bottom">
-                <h4 class="title"> {{ @$whyChooseContent->data_values->button_heading }} </h4>
-                <a href="#" class="btn btn--base"> @lang('Contact With Us') </a>
+                <h4 class="title"> {{ __(@$whyChooseContent->data_values->button_heading) }} </h4>
+                <a href="{{ @$whyChooseContent->data_values->button_url }}" class="btn btn--base"> {{ __(@$whyChooseContent->data_values->button_text) }} </a>
             </div>
         </div>
     </div>

@@ -67,4 +67,22 @@ class CategoryController extends Controller
     {
         return Category::changeStatus($id);
     }
+
+    public function toggleFeature(Request $request)
+    {
+        $category              = Category::findOrFail($request->id);
+        $category->is_featured = $request->is_featured;
+        $category->save();
+
+        return response()->json(['message' => __('Feature status updated successfully.')]);
+    }
+
+    public function togglePopular(Request $request)
+    {
+        $category             = Category::findOrFail($request->id);
+        $category->is_popular = $request->is_popular;
+        $category->save();
+
+        return response()->json(['message' => __('Popular status updated successfully.')]);
+    }
 }

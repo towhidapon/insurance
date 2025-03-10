@@ -3,10 +3,12 @@ namespace App\Http\Controllers;
 
 use App\Constants\Status;
 use App\Models\AdminNotification;
+use App\Models\Category;
 use App\Models\Frontend;
 use App\Models\Language;
 use App\Models\Page;
 use App\Models\Plan;
+use App\Models\quote;
 use App\Models\Subscriber;
 use App\Models\SupportMessage;
 use App\Models\SupportTicket;
@@ -195,42 +197,45 @@ class SiteController extends Controller
 
     public function category($id)
     {
-        $pageTitle = 'Home';
+        $category  = Category::findOrFail($id);
+        $pageTitle = $category->name;
 
-        $healthPlans = Plan::whereHas('category', function ($query) {
-            $query->where('name', 'Health Insurance');
-        })->where('status', 1)->findOrFail($id);
+        $plans = Plan::where('category_id', $id)->active()->get();
 
-        $maxChildren    = $healthPlans->where('status', 1)->max('no_children');
-        $coverageAmount = $healthPlans->where('status', 1)->max('coverage_amount');
+        $maxChildren    = $plans->max('no_children');
+        $coverageAmount = $plans->max('coverage_amount');
         $info           = json_decode(json_encode(getIpInfo()), true);
         $mobileCode     = @implode(',', $info['code']);
         $countries      = json_decode(file_get_contents(resource_path('views/partials/country.json')));
 
-        return view('Template::plan.insurance', compact('pageTitle', 'maxChildren', 'coverageAmount', 'mobileCode', 'countries'));
+        return view('Template::plan.insurance', compact('pageTitle', 'category', 'plans', 'maxChildren', 'coverageAmount', 'mobileCode', 'countries'));
     }
 
     public function showPlans(Request $request)
     {
         $validatedData = $request->validate([
             'full_name'       => 'required|string',
-            
             'mobile'          => 'required|string',
             'member'          => 'nullable|string',
             'your_age'        => 'required|string',
             'spouse_age'      => 'nullable|string',
             'children_count'  => 'nullable|string',
             'coverage_amount' => 'required|string',
+            'category_id'     => 'required|exists:categories,id',
         ]);
 
-        $query = Plan::where('status', '1');
+        $category = Category::findOrFail($validatedData['category_id']);
+
+        $query = Plan::active()->where('category_id', $validatedData['category_id']);
 
         if ($validatedData['coverage_amount'] !== "all") {
             $query->where('coverage_amount', '<=', $validatedData['coverage_amount']);
         }
-        $healthPlans = $query->get();
-        $pageTitle   = 'Health Insurance Plans';
-        return view('Template::plan.show', compact('pageTitle', 'healthPlans', 'validatedData'));
+
+        $plans     = $query->get();
+        $pageTitle = $category->name . ' Plans';
+
+        return view('Template::plan.show', compact('pageTitle', 'plans', 'validatedData', 'category'));
     }
 
     public function comparePlan(Request $request)
@@ -270,5 +275,24 @@ class SiteController extends Controller
             'status'  => 'success',
             'message' => 'Subscription successful!',
         ]);
+    }
+
+    public function quoteUpdate(Request $request)
+    {
+        $request->validate([
+            'mobile'      => 'required|numeric',
+            'topic_id'    => 'required|required|exists:quote_topics,id',
+            'mobile_code' => 'required|string',
+        ]);
+
+        $quoteRequest = new Quote;
+
+        $quoteRequest->mobile_code    = $request->mobile_code;
+        $quoteRequest->mobile         = $request->mobile;
+        $quoteRequest->quote_topic_id = $request->topic_id;
+        $quoteRequest->save();
+
+        $notify[] = ['success', 'Quote request submitted successfully.'];
+        return redirect()->back()->withNotify($notify);
     }
 }

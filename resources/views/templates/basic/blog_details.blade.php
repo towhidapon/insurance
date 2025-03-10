@@ -12,7 +12,7 @@
                 <div class="col-xxl-8 col-xl-7">
                     <div class="blog-details">
                         <div class="blog-details__thumb">
-                            <img src="{{ frontendImage('blog', @$blog->data_values->image) }}" class="fit-image" alt="">
+                            <img src="{{ frontendImage('blog', @$blog->data_values->image, '855x450') }}" class="fit-image" alt="image">
                         </div>
                         <div class="blog-details__content">
                             <h3 class="blog-details__title"> {{ __(@$blog->data_values->title) }} </h3>
@@ -20,7 +20,6 @@
                                 <span class="title"> @lang('Published') </span>
                                 <ul class="text-list flex-align">
                                     <li class="text-list__item fs-14"> {{ showDateTime(@$blog->created_at, 'd M Y') }} </li>
-                                    <li class="text-list__item fs-14"> @lang('5 min read') </li>
                                 </ul>
                             </div>
                             <div class="content-wrapper">
@@ -80,7 +79,6 @@
                                             <span class="title"> @lang('Published') </span>
                                             <ul class="text-list flex-align">
                                                 <li class="text-list__item fs-14">{{ showDateTime($blogContent->created_at, format: 'M d , Y') }}</li>
-                                                <li class="text-list__item fs-14"> @lang('5 min read') </li>
                                             </ul>
                                         </div>
                                     </div>

@@ -10,10 +10,10 @@
     <div class="container">
         <div class="section-heading">
             <h2 class="section-heading__title" data-highlight="2">
-                {{ @$howItWorkContent->data_values->heading }}
+                {{ __(@$howItWorkContent->data_values->heading) }}
             </h2>
             <p class="section-heading__desc">
-                {{ @$howItWorkContent->data_values->subheading }}
+                {{ __(@$howItWorkContent->data_values->subheading) }}
             </p>
         </div>
         <div class="row gy-4 justify-content-center">
@@ -21,7 +21,7 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="how-work-item">
                         <div class="how-work-item__thumb">
-                            <img src="{{ frontendImage('how_it_works', @$howItWorkElement->data_values->image) }}" alt="image">
+                            <img src="{{ frontendImage('how_it_works', @$howItWorkElement->data_values->image, '64x64') }}" alt="image">
                         </div>
                         <h4 class="how-work-item__title">{{ $loop->iteration }}. {{ __(@$howItWorkElement->data_values->title) }} </h4>
                         <p class="how-work-item__desc">

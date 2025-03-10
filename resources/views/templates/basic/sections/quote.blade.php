@@ -1,17 +1,19 @@
 @php
     @$quoteContent = getContent('quote.content', true);
+    $quoteTopics = App\Models\QuoteTopic::active()->with('quote')->orderBy('id', 'desc')->get();
+
 @endphp
 
-
-<div class="area-section py-60 bg-img" data-background-image="{{ frontendImage('quote', @$quoteContent->data_values->quote_shape) }}" alt="">
+<div class="area-section py-60 bg-img" data-background-image="{{ frontendImage('quote', @$quoteContent->data_values->quote_bg, '1905x450') }}" alt="image">
     <div class="left-bg"></div>
     <div class="right-bg"></div>
     <div class="container">
         <div class="section-heading style-left">
-            <h2 class="section-heading__title"> {{ @$quoteContent->data_values->heading }} </h2>
-            <p class="section-heading__desc"> {{ @$quoteContent->data_values->subheading }} </p>
+            <h2 class="section-heading__title"> {{ __(@$quoteContent->data_values->heading) }} </h2>
+            <p class="section-heading__desc"> {{ __(@$quoteContent->data_values->subheading) }} </p>
         </div>
-        <form action="#" class="area-form">
+        <form action="{{ route('quote.update') }}" method="POST" class="area-form">
+            @csrf
             <div class="row gy-4 align-items-end">
                 <div class="col-lg-5 col-md-4">
                     <label class="form--label"> @lang('Phone Number') </label>
@@ -31,18 +33,17 @@
                     </div>
                 </div>
 
-
                 <div class="col-lg-5 col-md-4">
                     <label class="form--label"> @lang('Select Your Topic') </label>
-                    <select class="form-select form--control select2">
-                        <option selected> Select team member </option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select form--control select2" name="topic_id" required>
+                        <@foreach ($quoteTopics as $quoteTopic)
+                            <option value="{{ $quoteTopic->id }}">{{ $quoteTopic->topic }}</option>
+                            @endforeach
                     </select>
                 </div>
+
                 <div class="col-lg-2 col-md-4">
-                    <button type="button" class="btn--white btn w-100"> @lang('Submit') </button>
+                    <button type="submit" class="btn--white btn w-100"> @lang('Submit') </button>
                 </div>
             </div>
         </form>
@@ -56,9 +57,6 @@
 @push('script-lib')
     <script src="{{ asset($activeTemplateTrue . 'js/select2.min.js') }}"></script>
 @endpush
-
-
-
 
 @push('script')
     <script>

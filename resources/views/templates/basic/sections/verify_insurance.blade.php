@@ -22,7 +22,7 @@
                                 <span class="step-list__number"></span>
                                 <div class="step-list__content">
                                     <h4 class="step-list__title"> {{ __(@$verifyInsuranceElement->data_values->title) }} </h4>
-                                    <p class="step-list__desc"> {{ @$verifyInsuranceElement->data_values->short_description }} </p>
+                                    <p class="step-list__desc"> {{ __(@$verifyInsuranceElement->data_values->short_description) }} </p>
                                 </div>
                             </li>
                         @endforeach

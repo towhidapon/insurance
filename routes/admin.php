@@ -85,6 +85,8 @@ Route::middleware('admin')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('save/{id?}', 'save')->name('save');
         Route::post('status/{id}', 'toggleStatus')->name('status');
+        Route::post('feature', 'toggleFeature')->name('toggleFeature');
+        Route::post('popular', 'togglePopular')->name('togglePopular');
     });
 
     // Plans
@@ -92,6 +94,22 @@ Route::middleware('admin')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('save/{id?}', 'save')->name('save');
         Route::post('status/{id}', 'toggleStatus')->name('status');
+    });
+
+    //feature
+    Route::controller('FeatureController')->prefix('feature')->name('feature.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('save/{id?}', 'save')->name('save');
+    });
+    //quotes
+    Route::controller('QuoteController')->prefix('quote')->name('quote.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('topic', 'topic')->name('topic');
+        Route::post('add-topic', 'saveTopic')->name('save.topic');
+        Route::post('update-topic', 'updateTopic')->name('update.topic');
+        Route::post('remove/topic/{id}', 'removeTopic')->name('remove.topic');
+        Route::post('status/{id}', 'toggleStatus')->name('topic.status');
+        Route::post('remove/{id}', 'remove')->name('remove');
     });
 
     // Subscriber

@@ -1,10 +1,10 @@
 @php
-    $registrationDisabled = getContent('register_disable.content',true);
+    $registrationDisabled = getContent('register_disable.content', true);
 @endphp
 <div class="register-disable">
     <div class="container">
         <div class="register-disable-image">
-            <img class="fit-image" src="{{ frontendImage('register_disable',@$registrationDisabled->data_values->image,'280x280') }}" alt="">
+            <img class="fit-image" src="{{ frontendImage('register_disable', @$registrationDisabled->data_values->image, '280x280') }}" alt="image">
         </div>
 
         <h5 class="register-disable-title">{{ __(@$registrationDisabled->data_values->heading) }}</h5>
@@ -18,7 +18,6 @@
 </div>
 @push('style')
     <style>
-
         .register-disable {
             height: 100vh;
             width: 100%;

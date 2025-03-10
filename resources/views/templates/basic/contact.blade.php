@@ -31,7 +31,7 @@
                             <div class="contact-item">
                                 <div class="contact-item__icon"> <i class="fa-solid fa-headset"></i> </div>
                                 <div class="contact-item__content">
-                                    <p class="contact-item__desc"> <a href="tel:"> {{ __(@$contactContent->data_values->contact_number) }} </a> </p>
+                                    <p class="contact-item__desc"> <a href="tel:{{ @$contactContent->data_values->contact_number }}"> {{ @$contactContent->data_values->contact_number }} </a> </p>
                                 </div>
                             </div>
                         </div>

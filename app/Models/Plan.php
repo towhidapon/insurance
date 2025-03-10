@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use App\Traits\GlobalStatus;
@@ -17,4 +16,9 @@ class Plan extends Model
     {
         return $this->hasMany(InsuredPlan::class);
     }
-}
+
+    public function features()
+    {
+        return $this->belongsToMany(Feature::class, 'feature_plan');
+    }
+}   

@@ -9,14 +9,14 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="section-heading style-three">
-                    <h2 class="section-heading__title"> {{ @$coverageContent->data_values->title }}</h2>
-                    <p class="section-heading__desc">{{ @$coverageContent->data_values->subtitle }}</p>
+                    <h2 class="section-heading__title"> {{ __(@$coverageContent->data_values->title) }}</h2>
+                    <p class="section-heading__desc">{{ __(@$coverageContent->data_values->subtitle) }}</p>
                 </div>
             </div>
         </div>
         <div class="client-logos brand-slider">
             @foreach ($coverageElements as $coverageElement)
-                <img src="{{ frontendImage('coverage', @$coverageElement->data_values->image) }}" alt="image">
+                <img src="{{ frontendImage('coverage', @$coverageElement->data_values->image, '160X45') }}" alt="image">
             @endforeach
         </div>
     </div>

@@ -2,6 +2,8 @@
     @$footerContent = getContent('footer.content', true);
     @$footerIcons = getContent('social_icon.element', false, orderById: true);
     @$contactContent = getContent('contact_us.content', true);
+
+    $categories = App\Models\Category::active()->get();
 @endphp
 
 <footer class="footer-area">
@@ -16,8 +18,7 @@
                     <form method="POST" action="{{ route('subscribe') }}" class="newsletter-form">
                         @csrf
                         <div class="top-footer__mail">
-                            <input type="email" name="email" id="email" class="form--control"
-                                placeholder="Enter email">
+                            <input type="email" name="email" id="email" class="form--control" placeholder="Enter email">
                             <button type="submit" class="btn--white btn"> @lang('Subscribe') </button>
                         </div>
                     </form>
@@ -41,8 +42,7 @@
                             <ul class="social-list">
                                 @foreach ($footerIcons as $footerIcon)
                                     <li class="social-list__item">
-                                        <a href="{{ @$footerIcon->data_values->url }}"
-                                            class="social-list__link flex-center">
+                                        <a href="{{ @$footerIcon->data_values->url }}" target="_blank" class="social-list__link flex-center">
                                             @php
                                                 echo @$footerIcon->data_values->social_icon;
                                             @endphp
@@ -57,16 +57,11 @@
                     <div class="footer-item">
                         <h6 class="footer-item__title"> @lang('Quick Links') </h6>
                         <ul class="footer-menu">
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> @lang('Our Insurances')
-                                </a></li>
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> @lang('Claims Process')
-                                </a></li>
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> @lang('Blog')
-                                </a></li>
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> @lang('FAQs')
-                                </a></li>
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> @lang('Contact Us')
-                                </a></li>
+                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> @lang('Our Insurances') </a></li>
+                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> @lang('Claims Process') </a></li>
+                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> @lang('Blog') </a></li>
+                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> @lang('FAQs') </a></li>
+                            <li class="footer-menu__item"><a href="#" class="footer-menu__link"> @lang('Contact Us') </a></li>
                         </ul>
                     </div>
                 </div>
@@ -74,16 +69,10 @@
                     <div class="footer-item">
                         <h6 class="footer-item__title"> @lang('Popular Policies') </h6>
                         <ul class="footer-menu">
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link">
-                                    @lang('Life Insurance')</a></li>
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link">
-                                    @lang('Health Insurance') </a></li>
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link">
-                                    @lang('Car Insurance') </a></li>
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link">
-                                    @lang('Home Insurance') </a></li>
-                            <li class="footer-menu__item"><a href="#" class="footer-menu__link">
-                                    @lang('Travel Insurance') </a></li>
+                            @foreach ($categories as $category)
+                                <li class="footer-menu__item"><a href="{{ route('category.details', $category->id) }}" class="footer-menu__link"> {{ __($category->name) }}</a></li>
+                            @endforeach
+
                         </ul>
                     </div>
                 </div>
@@ -100,13 +89,17 @@
                             <li class="footer-contact-menu__item">
                                 <p class="text"> @lang('Email'):</p>
                                 <div class="footer-contact-menu__item-content">
-                                    <p> {{ __($contactContent->data_values->email) }} </p>
+                                    <a href="mailto:{{ __($contactContent->data_values->email) }}">
+                                        {{ __($contactContent->data_values->email) }}
+                                    </a>
                                 </div>
                             </li>
                             <li class="footer-contact-menu__item">
                                 <p class="text"> @lang('Phone'): </p>
                                 <div class="footer-contact-menu__item-content">
-                                    <p> {{ __($contactContent->data_values->contact_number) }} </p>
+                                    <a href="tel:{{ __($contactContent->data_values->contact_number) }}">
+                                        {{ __($contactContent->data_values->contact_number) }}
+                                    </a>
                                 </div>
                             </li>
                         </ul>
@@ -118,9 +111,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <p class="bottom-footer-text text-white"> &copy; @lang('Copyright') @php echo date('Y') @endphp .
-                                @lang('All rights reserved').</p>
-                            <p class="bottom-footer__desc"> @lang('Your trusted partner in protection.') </p>
+                            <p class="bottom-footer-text text-white"> &copy; @lang('Copyright') @php echo date('Y') @endphp . @lang('All rights reserved').</p>
                         </div>
                     </div>
                 </div>
@@ -130,6 +121,8 @@
     <!-- Footer Top End-->
 
 </footer>
+
+
 
 
 @push('script')
@@ -148,8 +141,8 @@
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        $('.newsletter-form').trigger('reset');
                         if (response.status == 'success') {
+                            $('.newsletter-form').trigger('reset');
                             notify('success', response.message);
                             $('.newsletter-content').html(response.html);
                         } else {

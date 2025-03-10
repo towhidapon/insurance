@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Feature;
 use App\Models\Plan;
 use Illuminate\Http\Request;
 
@@ -11,16 +12,20 @@ class PlanController extends Controller
     public function index()
     {
         $pageTitle = 'Manage Policy Plans';
-
-        $plans = Plan::with('category')->whereHas('category', function ($query) {
+        $plans     = Plan::with('category','features')->whereHas('category', function ($query) {
             $query->active();
         })->orderBy('id', 'desc')->paginate(getPaginate());
+
+        dd($plans);
         $categories = Category::active()->get();
-        return view('admin.plan.index', compact('pageTitle', 'plans', 'categories'));
+        $features   = Feature::all();
+        return view('admin.plan.index', compact('pageTitle', 'plans', 'categories', 'features'));
     }
 
     public function save(request $request, $id = 0)
     {
+      
+        
         $request->validate([
             'category_id'       => 'required|exists:categories,id',
             'name'              => 'required|string|max:255|unique:plans,name,' . $id,
@@ -40,6 +45,14 @@ class PlanController extends Controller
             $plan    = new Plan();
             $message = "Plan added successfully";
         }
+
+
+        if($request->has('feature_id')) {
+            $features = Feature::whereIn('id', $request->feature_id)->get();    
+
+
+        }
+        
         $plan->category_id       = $request->category_id;
         $plan->name              = $request->name;
         $plan->price             = $request->price;
@@ -50,6 +63,8 @@ class PlanController extends Controller
         $plan->children_coverage = $request->children_coverage ?? 0;
         $plan->no_children       = $request->no_children ?? 0;
         $plan->save();
+        
+        $plan->features()->sync($features);
 
         $notify[] = ['success', $message];
         return back()->withNotify($notify);

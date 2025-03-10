@@ -42,6 +42,7 @@ Route::controller('SiteController')->group(function () {
     Route::post('/show/plan', 'showPlans')->name('show.plan');
     Route::get('/compare/plan', 'comparePlan')->name('compare.plan');
     Route::post('/subscribe', 'subscribe')->name('subscribe');
+    Route::post('quote/update', 'quoteUpdate')->name('quote.update');
 
     Route::get('/{slug}', 'pages')->name('pages');
     Route::get('/', 'index')->name('home');
